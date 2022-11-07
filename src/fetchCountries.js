@@ -1,21 +1,5 @@
-// const fetchCountries = 'https://restcountries.com/v3.1/name/'
-
-// export default fetchCountries ;
-// function fetchCountries() {
-//     return fetch(`https://restcountries.com/v3.1/name/`)
-//         .then(response =>
-//         {
-//         if (!response.ok) {
-//         throw new Error(response.status)
-//         }
-//         return response.json()
-//         })
-//         .catch(error => error.message)
-        
-// }
-
-export function fetchCountries(searchTerm) {
-  return fetch(`https://restcountries.com/v2/name/${searchTerm}`)
+export function fetchCountries(name) {
+  return fetch(`https://restcountries.com/v2/name/${name}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(response.status);
