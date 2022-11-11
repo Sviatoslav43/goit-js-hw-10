@@ -8,7 +8,7 @@ const searchBox = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
-const searchCountry = e => {
+function searchCountry(e) {
   const searchTerm = searchBox.value.trim();
 
   fetchCountries(searchTerm)
@@ -37,28 +37,28 @@ function countriesData(data) {
     clearData(countryList);
     clearData(countryInfo);
 
-    return (countryList.innerHTML =
-      data.map(item =>
+     const countries = data.map(({flags, name}) =>
       ` <li class = 'country'>
-          <img src = '${item.flags.svg}' />
-          <p>${item.name}</p>
+          <img src = '${flags.svg}' />
+          <p>${name}</p>
         </li>`
-      ).join(''));
+       ).join('');
+    return countryInfo.innerHTML = countries
   } else {
     clearData(countryList);
     clearData(countryInfo);
 
     return (countryInfo.innerHTML = data
       .map(
-        item => 
+        ({flags, name, region, capital, population, languages}) => 
       ` <div class = 'country'> 
-          <img src = '${item.flags.svg}' />
+          <img src = '${flags.svg}' />
             <div class = 'country-body'>
-              <h3 class ="country-title ">${item.name}</h3>
-              <p><b>Region: </b> ${item.region}</p>
-              <p><b>Capital: </b> ${item.capital}</p>
-              <p><b>Population: </b> ${item.population.toLocaleString()}</p>
-              <p><b>Languages: </b> ${item.languages[0].name}</p>
+              <h3 class ="country-title ">${name}</h3>
+              <p><b>Region: </b> ${region}</p>
+              <p><b>Capital: </b> ${capital}</p>
+              <p><b>Population: </b> ${population.toLocaleString()}</p>
+              <p><b>Languages: </b> ${languages[0].name}</p>
             </div>
         </div>`
       ).join(''));
